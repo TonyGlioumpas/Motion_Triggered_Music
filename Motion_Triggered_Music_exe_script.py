@@ -49,12 +49,9 @@ def renamefiles(pth):
                 #print newname
         return "done"
 
-    
-
 try:
     print("Waiting for PIR to settle...")
     
-
     #Loop unitl PIR output is 0
     while GPIO.input(GPIO_PIR)==1:
         Current_State = 0
@@ -65,11 +62,9 @@ try:
 
     #Loop until user quits with CTRL-C
     while True:
-
         #Read PIR State
         Current_State = GPIO.input(GPIO_PIR)
 	#print Current_State
-
 
         if Current_State==True and Previous_State==False:
             print(" Motion detected!")
