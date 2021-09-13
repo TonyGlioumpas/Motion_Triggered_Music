@@ -1,3 +1,12 @@
+ """"Author      : Antonios Glioumpas
+     Description : In this project we use a Raspberry Pi 3 (RaPi3) as a music player. 
+                   Not an ordinary music player of course but a motion activated one.
+                   If anything moves in the room where the system is about to be installed a sensor sends a signal to the RaPi.
+                   When the RaPi receives a signal it picks randomly a song from a folder and plays it. 
+                   We can adjust the path that RaPi picks a song from an external USB flash drive. 
+     Date        : 16/04/2016              
+"""
+
 import RPi.GPIO as GPIO
 import os,random
 import time
@@ -20,7 +29,7 @@ def ransong():
     a = os.listdir(music_src)
     random_index = randrange(0,len(a))
     a = a[random_index]
-    print "Now playing: " + a
+    print ("Now playing: "  + a)
     os.system('omxplayer -o local '+ music_src + str(a))
     return a
 
@@ -66,11 +75,11 @@ try:
             print(" Motion detected!")
             Previous_State=True
             if os.listdir(music_src)==[]:
-                print "Refreshing the song pool"
+                print ("Refreshing the song pool")
                 os.rename(music_src,"/media/pi/GL_Drive/tmp/")
                 os.rename(music_dst,music_src)
                 os.rename("/media/pi/GL_Drive/tmp/",music_dst)
-                print "Refresh completed"
+                print ("Refresh completed")
             else:
                 a = ransong()
                 changefolder(a)
